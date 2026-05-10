@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stránka nenalezena | Nestroj Nábytek</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .not-found {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 40px 24px;
+        background: var(--bg);
+      }
+      .not-found-number {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(6rem, 20vw, 12rem);
+        font-weight: 700;
+        color: rgba(139,94,60,0.12);
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+      .not-found h1 {
+        font-size: clamp(1.5rem, 4vw, 2.2rem);
+        color: var(--dark);
+        margin-bottom: 16px;
+      }
+      .not-found p {
+        font-size: 15px;
+        color: var(--text-mid);
+        margin-bottom: 36px;
+        max-width: 400px;
+      }
+      .not-found .cta-button { display: inline-block; }
+    </style>
+  </head>
+  <body>
+    <div class="not-found">
+      <div class="not-found-number">404</div>
+      <h1>Stránka nenalezena</h1>
+      <p>Tato stránka neexistuje nebo byla přesunuta. Vraťte se na hlavní stránku.</p>
+      <a href="index.html" class="cta-button">Zpět na úvod</a>
+    </div>
+  </body>
+</html>
