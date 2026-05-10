@@ -373,22 +373,39 @@
       // FAB
       document.querySelector('.fab-call').style.display = 'flex';
 
-      // read category from URL
-      const params = new URLSearchParams(location.search);
-      let activeCat = params.get('k') || 'kuchyne';
-      if (!KATEGORIE[activeCat]) activeCat = Object.keys(KATEGORIE)[0];
+      // read category from URL hash (#kuchyne)
+      const getCat = () => {
+        const h = location.hash.replace('#', '');
+        return KATEGORIE[h] ? h : Object.keys(KATEGORIE)[0];
+      };
 
       // build category nav
       const catNav = document.getElementById('catNav');
       Object.entries(KATEGORIE).forEach(([key, { label }]) => {
         const a = document.createElement('a');
-        a.href = `galerie.html?k=${key}`;
-        a.className = 'cat-btn' + (key === activeCat ? ' active' : '');
+        a.href = `galerie.html#${key}`;
+        a.className = 'cat-btn';
         a.textContent = label;
         catNav.appendChild(a);
       });
 
-      renderGrid(activeCat);
+      const updateActive = (cat) => {
+        document.querySelectorAll('.cat-btn').forEach(b =>
+          b.classList.toggle('active', b.getAttribute('href').endsWith('#' + cat))
+        );
+      };
+
+      // re-render on hash change
+      window.addEventListener('hashchange', () => {
+        const cat = getCat();
+        updateActive(cat);
+        renderGrid(cat);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      const initCat = getCat();
+      updateActive(initCat);
+      renderGrid(initCat);
     });
 
     function renderGrid(cat) {
