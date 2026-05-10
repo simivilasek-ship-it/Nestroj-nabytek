@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Realizace | Nestroj Nábytek</title>
+    <meta name="description" content="Fotogalerie realizací zakázkového nábytku na míru — Nestroj Nábytek, Kravaře." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* ── Galerie page specifics ── */
+      .galerie-hero {
+        padding: calc(var(--nav-h) + 56px) 0 56px;
+        background: var(--bg);
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+      }
+      .galerie-hero .breadcrumb {
+        font-size: 13px;
+        color: var(--text-soft);
+        margin-bottom: 18px;
+      }
+      .galerie-hero .breadcrumb a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .galerie-hero .breadcrumb a:hover { text-decoration: underline; }
+      .galerie-hero h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 14px;
+        padding-bottom: 22px;
+        position: relative;
+        display: inline-block;
+      }
+      .galerie-hero h1::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 32px; height: 2px;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+      .galerie-hero p {
+        font-size: 15px;
+        color: var(--text-mid);
+        margin-top: 4px;
+      }
+
+      /* ── Category nav ── */
+      .cat-nav {
+        background: var(--bg);
+        padding: 28px 0 0;
+        position: sticky;
+        top: var(--nav-h);
+        z-index: 100;
+        border-bottom: 1px solid var(--border);
+      }
+      .cat-nav-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 24px 20px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .cat-btn {
+        padding: 9px 22px;
+        border-radius: 999px;
+        border: 1.5px solid var(--border);
+        background: var(--white);
+        color: var(--text-mid);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+      }
+      .cat-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .cat-btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--white);
+      }
+
+      /* ── Grid ── */
+      .galerie-section {
+        padding: 56px 0 100px;
+        background: var(--bg);
+      }
+      .galerie-grid {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .galerie-thumb {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 4/3;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        background: var(--bg-alt);
+      }
+      .galerie-thumb img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .galerie-thumb:hover img { transform: scale(1.06); }
+      .galerie-thumb::after {
+        content: '⤢';
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%) scale(0.6);
+        width: 44px; height: 44px;
+        border: 1.5px solid rgba(255,255,255,0.8);
+        border-radius: 50%;
+        color: white;
+        font-size: 17px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 44px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s, transform 0.3s;
+        pointer-events: none;
+      }
+      .galerie-thumb:hover::after {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      /* empty state */
+      .galerie-empty {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 80px 0;
+        color: var(--text-soft);
+        font-size: 15px;
+      }
+
+      /* ── Lightbox ── */
+      .lightbox {
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,0.96);
+        z-index: 9500;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+      }
+      .lightbox.active { display: flex; opacity: 1; }
+      .lightbox-img {
+        max-width: 90vw; max-height: 88vh;
+        object-fit: contain;
+        border-radius: 4px;
+        transition: opacity 0.15s ease;
+        display: block;
+      }
+      .lightbox-close {
+        position: absolute; top: 18px; right: 22px;
+        background: none;
+        border: 1px solid rgba(255,255,255,0.25);
+        color: rgba(255,255,255,0.75);
+        width: 42px; height: 42px;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: all 0.2s ease;
+        z-index: 2;
+      }
+      .lightbox-close:hover { background: rgba(255,255,255,0.1); color: #fff; }
+      .lightbox-prev, .lightbox-next {
+        position: absolute; top: 50%; transform: translateY(-50%);
+        background: none;
+        border: 1px solid rgba(255,255,255,0.2);
+        color: rgba(255,255,255,0.65);
+        font-size: 30px;
+        width: 50px; height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: all 0.2s ease;
+        z-index: 2; line-height: 1;
+      }
+      .lightbox-prev:hover, .lightbox-next:hover {
+        background: rgba(255,255,255,0.1);
+        border-color: var(--accent);
+        color: #fff;
+      }
+      .lightbox-prev { left: 22px; }
+      .lightbox-next { right: 22px; }
+      .lightbox-counter {
+        position: absolute; bottom: 22px; left: 50%;
+        transform: translateX(-50%);
+        color: rgba(255,255,255,0.4);
+        font-size: 11px; letter-spacing: 2px;
+      }
+
+      @media (max-width: 768px) {
+        .galerie-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .lightbox-prev { left: 10px; }
+        .lightbox-next { right: 10px; }
+      }
+      @media (max-width: 480px) {
+        .galerie-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading-screen" id="loadingScreen"><div class="loader"></div></div>
+
+    <header id="header">
+      <nav>
+        <a href="index.html#uvod" class="logo">
+          <div class="logo-mark">N</div>
+          <span class="logo-text">Nestroj Nábytek</span>
+        </a>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html#sluzby">Služby</a></li>
+          <li><a href="index.html#jak-to-funguje">Postup</a></li>
+          <li><a href="index.html#realizace">Realizace</a></li>
+          <li><a href="index.html#o-nas">O nás</a></li>
+          <li><a href="index.html#kontakt" class="nav-cta">Poptávka</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle">
+          <span></span><span></span><span></span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Page hero -->
+    <div class="galerie-hero">
+      <p class="breadcrumb"><a href="index.html">Úvod</a> / <a href="index.html#realizace">Realizace</a> / <span id="breadcrumbCat"></span></p>
+      <h1 id="galerieName">Galerie</h1>
+      <p id="galerieCount"></p>
+    </div>
+
+    <!-- Category filter -->
+    <nav class="cat-nav" aria-label="Kategorie">
+      <div class="cat-nav-inner" id="catNav"></div>
+    </nav>
+
+    <!-- Grid -->
+    <section class="galerie-section">
+      <div class="galerie-grid" id="galerieGrid"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <div class="logo-mark logo-mark--small">N</div>
+              <span>Nestroj Nábytek</span>
+            </div>
+            <p>Zakázková výroba nábytku na míru.<br />Kravaře · Opavský region.</p>
+          </div>
+          <div class="footer-links">
+            <a href="index.html#sluzby">Služby</a>
+            <a href="index.html#realizace">Realizace</a>
+            <a href="index.html#o-nas">O nás</a>
+            <a href="index.html#kontakt">Kontakt</a>
+          </div>
+          <div class="footer-contact">
+            <a href="tel:+420608712569">+420 608 712 569</a>
+            <a href="mailto:l.nestroj@seznam.cz">l.nestroj@seznam.cz</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 Nestroj Nábytek. Všechna práva vyhrazena.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+      <button class="lightbox-close" id="lbClose" aria-label="Zavřít">&#215;</button>
+      <button class="lightbox-prev" id="lbPrev" aria-label="Předchozí">&#8249;</button>
+      <img class="lightbox-img" id="lbImg" src="" alt="" />
+      <button class="lightbox-next" id="lbNext" aria-label="Další">&#8250;</button>
+      <div class="lightbox-counter" id="lbCounter"></div>
+    </div>
+
+    <a href="tel:+420608712569" class="fab-call" aria-label="Zavolat">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79C8.06 13.62 10.38 15.94 13.21 17.38L15.41 15.18C15.69 14.9 16.08 14.82 16.43 14.93C17.55 15.3 18.75 15.5 20 15.5C20.55 15.5 21 15.95 21 16.5V20C21 20.55 20.55 21 20 21C10.61 21 3 13.39 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z"/></svg>
+      <span>+420 608 712 569</span>
+    </a>
+
+    <script>
+    // ── Data ──────────────────────────────────────────────────────────
+    const KATEGORIE = {
+      kuchyne: {
+        label: 'Kuchyně',
+        images: [
+          { src: 'images/kuchyne/20200703_093347-768x576.jpg',   alt: 'Kuchyň na míru s ostrůvkem' },
+          { src: 'images/kuchyne/20210614_183232-768x576.jpg',   alt: 'Celý interiér — kuchyň, jídelna, knihovna' },
+          { src: 'images/kuchyne/20210723_133804-768x576.jpg',   alt: 'Bílá kuchyň s ostrůvkem' },
+          { src: 'images/kuchyne/270881925_482523443261268_1920332955264415337_n-768x512.jpg', alt: 'Bílá lesklá kuchyň s dřevěnou deskou' },
+        ]
+      },
+      skrine: {
+        label: 'Skříně',
+        images: [
+          { src: 'images/skrine/20200703_093217-scaled.jpg',     alt: 'Vestavěná skříň béžová s dřevěnými policemi' },
+          { src: 'images/skrine/20200703_093305-scaled.jpg',     alt: 'Ořechové knihovny s TV stěnou' },
+          { src: 'images/skrine/20210125_104835-scaled.jpg',     alt: 'Bílá vestavěná skříň s knihovnou' },
+          { src: 'images/skrine/20210429_110015-768x373.jpg',    alt: 'Obývací knihovna černá s dubem' },
+        ]
+      },
+      'obyvaci-pokoje': {
+        label: 'Obývací pokoje',
+        images: [
+          { src: 'images/obyvaci-pokoje/20200703_093217-scaled.jpg',  alt: 'Vestavěná skříň s dřevěnými policemi' },
+          { src: 'images/obyvaci-pokoje/20200703_093305-scaled.jpg',  alt: 'Ořechové knihovny s TV stěnou' },
+          { src: 'images/obyvaci-pokoje/20210125_104835-scaled.jpg',  alt: 'Bílá vestavěná skříň s knihovnou' },
+          { src: 'images/obyvaci-pokoje/20210429_110015-768x373.jpg', alt: 'Obývací knihovna černá s dubem' },
+          { src: 'images/obyvaci-pokoje/DSC_0035-768x512.jpg',        alt: 'TV skříňka z masivu' },
+        ]
+      },
+      koupelny: {
+        label: 'Koupelny',
+        images: [
+          { src: 'images/koupelny/20200804_141414-scaled.jpg',   alt: 'Plovoucí koupelnová skříňka s dvojumyvadlem' },
+          { src: 'images/koupelny/20201023_075407-scaled.jpg',   alt: 'Dřevěná koupelnová skříňka s umyvadlem' },
+          { src: 'images/koupelny/20201217_094529-scaled.jpg',   alt: 'Plovoucí skříňka s vlnovým obkladem' },
+          { src: 'images/koupelny/20210202_103543-scaled.jpg',   alt: 'Koupelnový nábytek detail' },
+          { src: 'images/koupelny/20210202_103615-scaled.jpg',   alt: 'Koupelna s vanou a dřevěným nábytkem' },
+          { src: 'images/koupelny/DSC_0020-768x512.jpg',         alt: 'Koupelnová skříňka detail' },
+        ]
+      },
+      stoly: {
+        label: 'Stoly',
+        images: [
+          { src: 'images/stoly/20201219_104419-2-scaled.jpg',    alt: 'Konferenční stolky — ořech a černý lak' },
+          { src: 'images/stoly/20210326_173307-scaled.jpg',      alt: 'Bílý jídelní stůl s čalouněnými židlemi' },
+          { src: 'images/stoly/DSC_0040-scaled.jpg',             alt: 'Konferenční stolek z dubu' },
+        ]
+      },
+    };
+
+    // ── Init ──────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => document.getElementById('loadingScreen').classList.add('hidden'), 600);
+
+      // header scroll
+      const header = document.getElementById('header');
+      window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+
+      // mobile menu
+      const toggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+      toggle.addEventListener('click', () => { toggle.classList.toggle('active'); navMenu.classList.toggle('active'); });
+
+      // FAB
+      document.querySelector('.fab-call').style.display = 'flex';
+
+      // read category from URL
+      const params = new URLSearchParams(location.search);
+      let activeCat = params.get('k') || 'kuchyne';
+      if (!KATEGORIE[activeCat]) activeCat = Object.keys(KATEGORIE)[0];
+
+      // build category nav
+      const catNav = document.getElementById('catNav');
+      Object.entries(KATEGORIE).forEach(([key, { label }]) => {
+        const a = document.createElement('a');
+        a.href = `galerie.html?k=${key}`;
+        a.className = 'cat-btn' + (key === activeCat ? ' active' : '');
+        a.textContent = label;
+        catNav.appendChild(a);
+      });
+
+      renderGrid(activeCat);
+    });
+
+    function renderGrid(cat) {
+      const { label, images } = KATEGORIE[cat];
+      document.title = `${label} | Nestroj Nábytek`;
+      document.getElementById('galerieName').textContent = label;
+      document.getElementById('breadcrumbCat').textContent = label;
+      document.getElementById('galerieCount').textContent = `${images.length} realizací`;
+
+      const grid = document.getElementById('galerieGrid');
+      grid.innerHTML = '';
+
+      if (!images.length) {
+        grid.innerHTML = '<p class="galerie-empty">Žádné fotografie v této kategorii.</p>';
+        return;
+      }
+
+      images.forEach((img, i) => {
+        const div = document.createElement('div');
+        div.className = 'galerie-thumb reveal';
+        div.innerHTML = `<img loading="lazy" src="${img.src}" alt="${img.alt}" />`;
+        div.addEventListener('click', () => openLightbox(images, i));
+        grid.appendChild(div);
+        // trigger reveal
+        requestAnimationFrame(() => requestAnimationFrame(() => div.classList.add('active')));
+      });
+    }
+
+    // ── Lightbox ──────────────────────────────────────────────────────
+    let _images = [], _idx = 0;
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCounter = document.getElementById('lbCounter');
+
+    function openLightbox(images, idx) {
+      _images = images; _idx = idx;
+      showLb(_idx);
+      lb.style.display = 'flex';
+      requestAnimationFrame(() => lb.style.opacity = '1');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLb() {
+      lb.style.opacity = '0';
+      setTimeout(() => { lb.style.display = 'none'; }, 250);
+      document.body.style.overflow = '';
+    }
+    function showLb(i) {
+      _idx = (i + _images.length) % _images.length;
+      lbImg.style.opacity = '0';
+      setTimeout(() => {
+        lbImg.src = _images[_idx].src;
+        lbImg.alt = _images[_idx].alt;
+        lbCounter.textContent = (_idx + 1) + ' / ' + _images.length;
+        lbImg.style.opacity = '1';
+      }, 130);
+    }
+
+    document.getElementById('lbClose').addEventListener('click', closeLb);
+    document.getElementById('lbPrev').addEventListener('click', () => showLb(_idx - 1));
+    document.getElementById('lbNext').addEventListener('click', () => showLb(_idx + 1));
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => {
+      if (lb.style.display !== 'flex') return;
+      if (e.key === 'Escape') closeLb();
+      if (e.key === 'ArrowLeft') showLb(_idx - 1);
+      if (e.key === 'ArrowRight') showLb(_idx + 1);
+    });
+    let lbTouch = 0;
+    lb.addEventListener('touchstart', e => { lbTouch = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', e => {
+      const d = lbTouch - e.changedTouches[0].clientX;
+      if (Math.abs(d) > 40) showLb(_idx + (d > 0 ? 1 : -1));
+    }, { passive: true });
+    </script>
+  </body>
+</html>

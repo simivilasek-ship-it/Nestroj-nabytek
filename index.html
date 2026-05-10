@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nestroj Nábytek | Zakázková výroba nábytku na míru — Kravaře</title>
+    <meta
+      name="description"
+      content="Zakázková výroba nábytku na míru v Kravaři — kuchyně, skříně, obývací pokoje, koupelny, stoly, kancelářský nábytek. 3D vizualizace zdarma, montáž v ceně."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+      <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+      <nav>
+        <a href="#uvod" class="logo">
+          <div class="logo-mark">N</div>
+          <span class="logo-text">Nestroj Nábytek</span>
+        </a>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#sluzby">Služby</a></li>
+          <li><a href="#jak-to-funguje">Postup</a></li>
+          <li><a href="#realizace">Realizace</a></li>
+          <li><a href="#o-nas">O nás</a></li>
+          <li><a href="#kontakt" class="nav-cta">Poptávka</a></li>
+        </ul>
+
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="uvod" style="background-image: url('images/20210614_183232-scaled.jpg');">
+      <div class="hero-overlay"></div>
+      <div class="hero-content reveal">
+        <p class="hero-eyebrow">Zakázková výroba · Kravaře</p>
+        <h1 class="hero-title">Nábytek na míru,<br /><em>přesně podle vás.</em></h1>
+        <p class="hero-subtitle">
+          Kuchyně, skříně, obývací pokoje a další —<br />vyrobíme přesně to, co si představujete.
+        </p>
+        <div class="hero-actions">
+          <a href="#kontakt" class="cta-button">Nezávazná poptávka</a>
+          <a href="#realizace" class="cta-link">Prohlédnout realizace →</a>
+        </div>
+      </div>
+      <a href="#benefity" class="hero-scroll" aria-label="Přejít dolů">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section" id="benefity">
+      <div class="container">
+        <div class="benefits-grid">
+          <div class="benefit-card reveal">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="10" width="36" height="28" rx="3" stroke="currentColor" stroke-width="2"/>
+                <path d="M14 32L20 22l6 8 4-6 4 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="16" cy="18" r="2.5" stroke="currentColor" stroke-width="2"/>
+                <path d="M6 38h36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>3D vizualizace zdarma</h3>
+            <p>Ještě před výrobou uvidíte, jak bude váš nábytek vypadat — přesně ve vašem prostoru.</p>
+          </div>
+          <div class="benefit-card reveal">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 24l10 10L40 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3>Montáž v ceně</h3>
+            <p>Přivezeme, složíme a nainstalujeme — bez skrytých poplatků, bez starostí na vaší straně.</p>
+          </div>
+          <div class="benefit-card reveal">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 38V18l14-10 14 10v20" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <rect x="18" y="28" width="12" height="10" rx="1" stroke="currentColor" stroke-width="2"/>
+                <path d="M10 26h28" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3>Výroba přesně na míru</h3>
+            <p>Každý kus navrhujeme a vyrábíme individuálně — využijeme každý centimetr vašeho prostoru.</p>
+          </div>
+          <div class="benefit-card reveal">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 6l4 8 9 1.3-6.5 6.3 1.5 9L24 26l-8 4.6 1.5-9L11 15.3l9-1.3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M14 36c0 3.3 4.5 6 10 6s10-2.7 10-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Lokální rodinná firma</h3>
+            <p>Přímá komunikace, osobní přístup a férové ceny. Žádné prostředníky, jen naše vlastní práce.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="sluzby">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-eyebrow">Co vyrábíme</p>
+          <h2 class="section-title">Služby</h2>
+          <p class="section-subtitle">
+            Od kuchyní po kancelářský nábytek — každý projekt bereme jako jedinečný.
+          </p>
+        </div>
+
+        <div class="services-grid reveal">
+          <div class="service-card">
+            <div class="service-emoji">🍳</div>
+            <h3 class="service-name">Kuchyně</h3>
+            <p class="service-desc">
+              Kuchyňské linky na míru — od klasiky po moderní design. Optimální využití prostoru, výběr materiálů a povrchů přesně podle vás.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-emoji">🚪</div>
+            <h3 class="service-name">Skříně</h3>
+            <p class="service-desc">
+              Vestavěné skříně, šatny a úložné systémy na míru. Využijeme každý roh, každou niku — prostoru bude dost.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-emoji">🛋️</div>
+            <h3 class="service-name">Obývací pokoje</h3>
+            <p class="service-desc">
+              TV stěny, regály, vitríny a kombinované sestavy. Nábytek, který ladí s vaším interiérem a stylem bydlení.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-emoji">🚿</div>
+            <h3 class="service-name">Koupelny</h3>
+            <p class="service-desc">
+              Koupelnový nábytek odolný vlhkosti — skříňky pod umyvadlo, zrcadlové skříňky, policové systémy.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-emoji">🪵</div>
+            <h3 class="service-name">Stoly</h3>
+            <p class="service-desc">
+              Jídelní stoly, pracovní desky i barové pulty. Masivní dřevo, dýha nebo moderní lamino — dle vašeho výběru.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-emoji">💼</div>
+            <h3 class="service-name">Kancelářský nábytek</h3>
+            <p class="service-desc">
+              Pracovní stoly, úložné skříňky, recepční pulty a kancelářské sestavy. Funkční a reprezentativní.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="process-section" id="jak-to-funguje">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-eyebrow">Jednoduchý postup</p>
+          <h2 class="section-title">Jak to funguje</h2>
+          <p class="section-subtitle">Od prvního kontaktu po hotový nábytek — tři kroky, žádné komplikace.</p>
+        </div>
+
+        <div class="process-steps reveal">
+          <div class="process-step">
+            <div class="step-number">01</div>
+            <div class="step-content">
+              <h3>Poptávka a konzultace</h3>
+              <p>
+                Napište nebo zavolejte. Domluvíme schůzku, prohlédneme prostor a prodiskutujeme vaše představy — bez závazků, zcela zdarma.
+              </p>
+            </div>
+          </div>
+          <div class="process-divider">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="process-step">
+            <div class="step-number">02</div>
+            <div class="step-content">
+              <h3>3D návrh a cenová nabídka</h3>
+              <p>
+                Zpracujeme 3D vizualizaci přímo ve vašem prostoru, abyste viděli výsledek ještě před výrobou. Součástí je přesná cenová nabídka.
+              </p>
+            </div>
+          </div>
+          <div class="process-divider">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="process-step">
+            <div class="step-number">03</div>
+            <div class="step-content">
+              <h3>Výroba a montáž</h3>
+              <p>
+                Po schválení návrhu zahájíme výrobu. V dohodnutém termínu přivezeme a smontujeme — úklid po montáži samozřejmostí.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio / Realizace -->
+    <section class="portfolio-section" id="realizace">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-eyebrow">Naše práce</p>
+          <h2 class="section-title">Realizace</h2>
+          <p class="section-subtitle">Ukázky nábytku, který jsme vyrobili pro naše zákazníky.</p>
+        </div>
+      </div>
+
+      <!-- Mobile carousel -->
+      <div class="carousel d-md-none" id="portfolioCarousel">
+        <div class="carousel-indicators">
+          <button type="button" data-slide="0" class="active" aria-label="Slide 1"></button>
+          <button type="button" data-slide="1" aria-label="Slide 2"></button>
+          <button type="button" data-slide="2" aria-label="Slide 3"></button>
+          <button type="button" data-slide="3" aria-label="Slide 4"></button>
+          <button type="button" data-slide="4" aria-label="Slide 5"></button>
+          <button type="button" data-slide="5" aria-label="Slide 6"></button>
+          <button type="button" data-slide="6" aria-label="Slide 7"></button>
+          <button type="button" data-slide="7" aria-label="Slide 8"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-track">
+            <div class="carousel-item active">
+              <img loading="lazy" src="images/20210723_133804-scaled.jpg" alt="Bílá kuchyň na míru s ostrůvkem" class="portfolio-img" />
+            </div>
+            <div class="carousel-item">
+              <img loading="lazy" src="images/270881925_482523443261268_1920332955264415337_n.jpg" alt="Bílá lesklá kuchyň s dřevěnou deskou" class="portfolio-img" />
+            </div>
+            <div class="carousel-item">
+              <img loading="lazy" src="images/20200703_093217-scaled.jpg" alt="Vestavěná skříň s dřevěnými policemi" class="portfolio-img" />
+            </div>
+            <div class="carousel-item">
+              <img loading="lazy" src="images/20210429_110015-scaled.jpg" alt="Obývací knihovna černá s dubem" class="portfolio-img" />
+            </div>
+            <div class="carousel-item">
+              <img loading="lazy" src="images/20200703_093305-scaled.jpg" alt="Ořechová knihovna s TV stěnou" class="portfolio-img" />
+            </div>
+            <div class="carousel-item">
+              <img loading="lazy" src="images/20201217_094529-scaled.jpg" alt="Koupelnový nábytek s plovoucí skříňkou" class="portfolio-img" />
+            </div>
+            <div class="carousel-item">
+              <img loading="lazy" src="images/20201219_104419-2-scaled.jpg" alt="Konferenční stolky na míru" class="portfolio-img" />
+            </div>
+            <div class="carousel-item">
+              <img loading="lazy" src="images/DSC_0035-scaled.jpg" alt="TV skříňka z masivu" class="portfolio-img" />
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" aria-label="Předchozí">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" aria-label="Další">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <!-- Desktop grid -->
+      <div class="portfolio-grid d-none d-md-grid reveal">
+        <a class="portfolio-item portfolio-item--large" href="galerie.html?k=kuchyne">
+          <img loading="lazy" src="images/20210723_133804-scaled.jpg" alt="Bílá kuchyň na míru s ostrůvkem" class="portfolio-img" />
+          <div class="portfolio-overlay"><span>Kuchyně na míru →</span></div>
+        </a>
+        <a class="portfolio-item" href="galerie.html?k=skrine">
+          <img loading="lazy" src="images/20200703_093217-scaled.jpg" alt="Vestavěná skříň s dřevěnými policemi" class="portfolio-img" />
+          <div class="portfolio-overlay"><span>Vestavěné skříně →</span></div>
+        </a>
+        <a class="portfolio-item" href="galerie.html?k=obyvaci-pokoje">
+          <img loading="lazy" src="images/20210429_110015-scaled.jpg" alt="Obývací knihovna černá s dubem" class="portfolio-img" />
+          <div class="portfolio-overlay"><span>Obývací pokoje →</span></div>
+        </a>
+        <a class="portfolio-item" href="galerie.html?k=koupelny">
+          <img loading="lazy" src="images/20201217_094529-scaled.jpg" alt="Koupelnový nábytek plovoucí" class="portfolio-img" />
+          <div class="portfolio-overlay"><span>Koupelny →</span></div>
+        </a>
+        <a class="portfolio-item" href="galerie.html?k=stoly">
+          <img loading="lazy" src="images/20201219_104419-2-scaled.jpg" alt="Konferenční stolky na míru" class="portfolio-img" />
+          <div class="portfolio-overlay"><span>Stoly →</span></div>
+        </a>
+        <a class="portfolio-item" href="galerie.html?k=obyvaci-pokoje">
+          <img loading="lazy" src="images/DSC_0035-scaled.jpg" alt="TV skříňka z masivu" class="portfolio-img" />
+          <div class="portfolio-overlay"><span>Obývací pokoje →</span></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section" id="reference">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-eyebrow">Reference</p>
+          <h2 class="section-title">Co říkají zákazníci</h2>
+          <div class="reviews-aggregate">
+            <span class="stars">★★★★★</span>
+            <span class="score">5.0</span>
+            <span class="count">· spokojení zákazníci</span>
+          </div>
+        </div>
+
+        <div class="reviews-grid reveal">
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">
+              "Kuchyň od Nestroje splnila naše očekávání na 100 %. Pan Nestroj vše vyměřil, navrhl 3D vizualizaci a výsledek přesně odpovídal. Montáž proběhla čistě a v termínu. Maximálně doporučuji."
+            </p>
+            <div class="review-footer">
+              <div class="reviewer-info">
+                <div class="reviewer-avatar">M</div>
+                <div>
+                  <div class="reviewer-name">Markéta H.</div>
+                  <div class="reviewer-detail">Kuchyň na míru · Opava</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">
+              "Vestavěné skříně do ložnice jsou přesně to, co jsme chtěli. Využili místo, kde by standardní nábytek nešel vůbec umístit. Férová cena, pěkná práce, žádné starosti. Určitě se vrátíme."
+            </p>
+            <div class="review-footer">
+              <div class="reviewer-info">
+                <div class="reviewer-avatar">T</div>
+                <div>
+                  <div class="reviewer-name">Tomáš B.</div>
+                  <div class="reviewer-detail">Vestavěné skříně · Kravaře</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="o-nas">
+      <div class="container">
+        <div class="about-grid reveal">
+          <div class="about-image">
+            <img
+              src="images/20200703_093347-scaled.jpg"
+              alt="Kuchyň na míru — realizace Nestroj Nábytek"
+              class="about-photo"
+              loading="lazy"
+            />
+          </div>
+          <div class="about-content">
+            <p class="section-eyebrow">Kdo jsme</p>
+            <h2>O nás</h2>
+            <p>
+              Jsme rodinná firma z Kravař, která se věnuje zakázkové výrobě nábytku na míru. Každý projekt bereme jako jedinečný — nesériový, přemyšlený a poctivě zpracovaný.
+            </p>
+            <p>
+              Pracujeme přímo s zákazníkem od prvního setkání po finální montáž. Díky tomu máte jistotu, že výsledek odpovídá přesně tomu, co jste si představovali — v rozměrech, materiálech i provedení.
+            </p>
+            <p>
+              Nespoléháme na subdodavatele. Práci, na které se domluvíme, sami odvedeme.
+            </p>
+            <div class="about-stats">
+              <div class="stat">
+                <span class="stat-number">15+</span>
+                <span class="stat-label">let zkušeností</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">200+</span>
+                <span class="stat-label">realizací</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">vlastní výroba</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="kontakt">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-eyebrow">Pojďme se pobavit</p>
+          <h2 class="section-title">Kontakt</h2>
+          <p class="section-subtitle">Popište nám váš projekt a ozveme se do 24 hodin.</p>
+        </div>
+
+        <div class="contact-layout reveal">
+          <!-- Form -->
+          <form class="contact-form" id="contactForm" action="https://formspree.io/f/REPLACE_ME" method="POST">
+            <input type="hidden" name="_subject" value="Nová poptávka — Nestroj Nábytek" />
+            <div class="form-group">
+              <label for="name">Jméno a příjmení *</label>
+              <input type="text" id="name" name="jmeno" placeholder="Jan Novák" autocomplete="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail nebo telefon *</label>
+              <input type="text" id="email" name="kontakt" placeholder="jan@email.cz nebo +420 xxx xxx xxx" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Poptávka</label>
+              <textarea id="message" name="zprava" rows="5" placeholder="Co potřebujete vyrobit? Kde? V jakém rozsahu?"></textarea>
+            </div>
+            <button type="submit" class="form-submit">Odeslat poptávku</button>
+            <p class="form-note">Zcela zdarma · Bez závazků · Odpovíme do 24 h</p>
+          </form>
+
+          <!-- Contact Info -->
+          <div class="contact-info">
+            <a href="tel:+420608712569" class="contact-card">
+              <div class="contact-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.62 10.79C8.06 13.62 10.38 15.94 13.21 17.38L15.41 15.18C15.69 14.9 16.08 14.82 16.43 14.93C17.55 15.3 18.75 15.5 20 15.5C20.55 15.5 21 15.95 21 16.5V20C21 20.55 20.55 21 20 21C10.61 21 3 13.39 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z" fill="currentColor"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-card-label">Telefon</div>
+                <div class="contact-card-value">+420 608 712 569</div>
+              </div>
+            </a>
+            <a href="mailto:l.nestroj@seznam.cz" class="contact-card">
+              <div class="contact-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="currentColor"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-card-label">E-mail</div>
+                <div class="contact-card-value">l.nestroj@seznam.cz</div>
+              </div>
+            </a>
+            <div class="contact-card contact-card--static">
+              <div class="contact-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" fill="currentColor"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-card-label">Adresa</div>
+                <div class="contact-card-value">Kravaře, Opavský region</div>
+              </div>
+            </div>
+            <div class="contact-card contact-card--static">
+              <div class="contact-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm.5 5H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" fill="currentColor"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-card-label">Pracovní doba</div>
+                <div class="contact-card-value">Po–Pá 7:00–17:00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <div class="logo-mark logo-mark--small">N</div>
+              <span>Nestroj Nábytek</span>
+            </div>
+            <p>Zakázková výroba nábytku na míru.<br />Kravaře · Opavský region.</p>
+          </div>
+          <div class="footer-links">
+            <a href="#sluzby">Služby</a>
+            <a href="#jak-to-funguje">Postup</a>
+            <a href="#realizace">Realizace</a>
+            <a href="#o-nas">O nás</a>
+            <a href="#kontakt">Kontakt</a>
+          </div>
+          <div class="footer-contact">
+            <a href="tel:+420608712569">+420 608 712 569</a>
+            <a href="mailto:l.nestroj@seznam.cz">l.nestroj@seznam.cz</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 Nestroj Nábytek. Všechna práva vyhrazena.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating call button (mobile) -->
+    <a href="tel:+420608712569" class="fab-call" aria-label="Zavolat +420 608 712 569">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6.62 10.79C8.06 13.62 10.38 15.94 13.21 17.38L15.41 15.18C15.69 14.9 16.08 14.82 16.43 14.93C17.55 15.3 18.75 15.5 20 15.5C20.55 15.5 21 15.95 21 16.5V20C21 20.55 20.55 21 20 21C10.61 21 3 13.39 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z"/>
+      </svg>
+      <span>+420 608 712 569</span>
+    </a>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
