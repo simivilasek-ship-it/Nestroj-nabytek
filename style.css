@@ -279,6 +279,30 @@ nav {
   transform: translateY(-2px);
   box-shadow: 0 12px 36px rgba(139,94,60,0.35);
 }
+.cta-button--outline {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.5);
+  color: var(--white);
+}
+.cta-button--outline:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: var(--white);
+  box-shadow: none;
+}
+.cta-button--accent-outline {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+}
+.cta-button--accent-outline:hover {
+  background: var(--accent);
+  color: var(--white);
+  box-shadow: 0 8px 24px rgba(139,94,60,0.25);
+}
+.portfolio-cta {
+  text-align: center;
+  padding: 52px 0 80px;
+}
 .cta-link {
   color: rgba(255,255,255,0.55);
   text-decoration: none;
@@ -437,10 +461,20 @@ nav {
   box-shadow: var(--shadow-lg);
   border-top-color: var(--accent);
 }
-.service-emoji {
-  font-size: 2.2rem;
-  margin-bottom: 18px;
-  display: block;
+.service-icon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 22px;
+  color: var(--accent);
+  background: rgba(139,94,60,0.08);
+  border-radius: 14px;
+  padding: 12px;
+  transition: background 0.35s ease, transform 0.35s ease;
+}
+.service-icon svg { width: 100%; height: 100%; }
+.service-card:hover .service-icon {
+  background: rgba(139,94,60,0.15);
+  transform: scale(1.08);
 }
 .service-name {
   font-family: 'Playfair Display', serif;
@@ -453,35 +487,97 @@ nav {
   font-size: 14px;
   color: var(--text-mid);
   line-height: 1.75;
+  flex: 1;
+}
+.service-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: gap 0.2s ease, opacity 0.2s ease;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.service-card:hover .service-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+.service-card {
+  display: flex;
+  flex-direction: column;
 }
 
 /* ─── Process ──────────────────────────────────────────────────────── */
 .process-section {
-  padding: 100px 0 120px;
+  padding: 100px 0 80px;
   background: var(--bg);
 }
 .process-steps {
-  display: flex;
-  align-items: flex-start;
-  gap: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  position: relative;
+}
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 36px;
+  left: calc(16.66% + 12px);
+  right: calc(16.66% + 12px);
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), rgba(139,94,60,0.3), var(--accent));
+  z-index: 0;
 }
 .process-step {
-  flex: 1;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 28px 32px;
+  box-shadow: var(--shadow-sm);
   text-align: center;
-  padding: 0 24px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.step-number {
-  font-family: 'Playfair Display', serif;
-  font-size: 3.5rem;
-  font-weight: 900;
-  color: rgba(139,94,60,0.12);
-  line-height: 1;
-  margin-bottom: 20px;
-  letter-spacing: -2px;
+.process-step:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+.step-bubble {
+  width: 64px; height: 64px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;
+  color: var(--white);
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 16px rgba(139,94,60,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.process-step:hover .step-bubble {
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px rgba(139,94,60,0.4);
+}
+.step-bubble svg { width: 28px; height: 28px; }
+.step-connector { display: none; }
+.step-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  opacity: 0.6;
 }
 .step-content h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--dark);
   margin-bottom: 12px;
@@ -491,16 +587,9 @@ nav {
   color: var(--text-mid);
   line-height: 1.75;
 }
-.process-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 24px;
-  flex-shrink: 0;
-  color: rgba(139,94,60,0.35);
-}
-.process-divider svg {
-  width: 28px; height: 28px;
+.process-cta {
+  text-align: center;
+  margin-top: 52px;
 }
 
 /* ─── Portfolio images ─────────────────────────────────────────────── */
@@ -1104,13 +1193,10 @@ footer {
   .services-section { padding: 80px 0 100px; }
 
   .process-steps {
-    flex-direction: column;
-    gap: 8px;
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
-  .process-divider svg { transform: rotate(90deg); }
-  .process-step { padding: 0; text-align: left; }
-  .process-step { display: flex; gap: 20px; align-items: flex-start; }
-  .step-number { font-size: 2.5rem; flex-shrink: 0; line-height: 1.2; }
+  .process-steps::before { display: none; }
 
   .portfolio-section { padding: 80px 0 0; }
 
