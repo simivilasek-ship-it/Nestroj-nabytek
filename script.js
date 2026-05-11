@@ -106,8 +106,74 @@ document.addEventListener('DOMContentLoaded', () => {
       start();
     }, { passive: true });
 
+    // otevřít lightbox při kliknutí na slide
+    slides.forEach((slide, i) => {
+      slide.addEventListener('click', () => {
+        const img = slide.querySelector('img');
+        if (img) openLightbox(i);
+      });
+    });
+
     goTo(0);
     start();
+  })();
+
+  // ── Lightbox (mobile carousel) ──────────────────────────────────────
+  (function initLightbox() {
+    const lb      = document.getElementById('carouselLightbox');
+    if (!lb) return;
+    const lbImg   = document.getElementById('clbImg');
+    const lbClose = document.getElementById('clbClose');
+    const lbPrev  = document.getElementById('clbPrev');
+    const lbNext  = document.getElementById('clbNext');
+    const lbCount = document.getElementById('clbCounter');
+
+    const slides = Array.from(document.querySelectorAll('#portfolioCarousel .carousel-item img'));
+    let current = 0;
+
+    window.openLightbox = function(i) {
+      current = i;
+      showImg(current);
+      lb.style.display = 'flex';
+      requestAnimationFrame(() => lb.classList.add('lb-visible'));
+      document.body.style.overflow = 'hidden';
+    };
+
+    function closeLb() {
+      lb.classList.remove('lb-visible');
+      setTimeout(() => { lb.style.display = 'none'; }, 250);
+      document.body.style.overflow = '';
+    }
+
+    function showImg(i) {
+      current = (i + slides.length) % slides.length;
+      lbImg.style.opacity = '0';
+      setTimeout(() => {
+        lbImg.src = slides[current].src;
+        lbImg.alt = slides[current].alt;
+        lbCount.textContent = (current + 1) + ' / ' + slides.length;
+        lbImg.style.opacity = '1';
+      }, 120);
+    }
+
+    lbClose.addEventListener('click', closeLb);
+    lbPrev.addEventListener('click',  () => showImg(current - 1));
+    lbNext.addEventListener('click',  () => showImg(current + 1));
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+
+    document.addEventListener('keydown', e => {
+      if (lb.style.display !== 'flex') return;
+      if (e.key === 'Escape')     closeLb();
+      if (e.key === 'ArrowLeft')  showImg(current - 1);
+      if (e.key === 'ArrowRight') showImg(current + 1);
+    });
+
+    let touchX = 0;
+    lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend',   e => {
+      const d = touchX - e.changedTouches[0].clientX;
+      if (Math.abs(d) > 40) showImg(current + (d > 0 ? 1 : -1));
+    }, { passive: true });
   })();
 
   // ── Contact form reset ──────────────────────────────────────────────
